@@ -1,8 +1,11 @@
-CREATE VIEW view_addresses
 AS SELECT
        CONCAT_WS(' ', first_name, last_name) AS "full name",
        department_id,
-       CONCAT_WS(' ', number, street) AS "addresses"
+       CONCAT_WS(' ', number, street) AS "address"
 FROM
-    employees,
-    addresses;
+    employees AS e ,
+    addresses AS a
+WHERE
+    e.address_id = a.id
+ORDER BY
+    address;
