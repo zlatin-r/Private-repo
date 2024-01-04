@@ -3,7 +3,7 @@ AS SELECT
        department_id,
        CONCAT_WS(' ', number, street) AS "address"
 FROM
-    employees AS e ,
+    employees AS e,
     addresses AS a
 WHERE
     e.address_id = a.id
