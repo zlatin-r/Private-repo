@@ -1,3 +1,1 @@
-UPDATE
-    projects
-SET name = UPPER(name);
+DROP VIEW view_company_chart;
