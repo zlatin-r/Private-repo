@@ -10,7 +10,7 @@ urlpatterns = (
     path(
          "profile/<int:pk>/", include([
             path("", details_profile, name="details profile"),
-            path("eddit/", edit_profile, name="edit profile"),
+            path("edit/", edit_profile, name="edit profile"),
             path("delete/", delete_profile, name="delete profile"),
     ]))
 )
