@@ -17,16 +17,16 @@ def signout_user(request):
     return None
 
 
-def details_profile(request):
+def details_profile(request, pk):
     context = {}
     return render(request, "accounts/details_profile.html")
 
 
-def edit_profile(request):
+def edit_profile(request, pk):
     context = {}
     return render(request, "accounts/edit_profile.html", context)
 
 
-def delete_profile(request):
+def delete_profile(request, pk):
     context = {}
     return render(request, "accounts/delete_profile.html", context)
