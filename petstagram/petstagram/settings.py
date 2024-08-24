@@ -6,7 +6,9 @@ SECRET_KEY = 'django-insecure-@s#$@m(v0^71b6=9)vqp1df!0+g9^w)o2&v9)*y)ey*+jx(&kl
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+]
 
 INSTALLED_APPS = [
     # Django apps
