@@ -6,6 +6,7 @@ from petstagram.accounts.views import signup_user, signin_user, signout_user, de
 urlpatterns = (
     path("singup/", signup_user, name="signup user"),
     path("singin/", signin_user, name="signin user"),
+    path("signout/", signout_user, name="signout user"),
 
     path(
          "profile/<int:pk>/", include([
