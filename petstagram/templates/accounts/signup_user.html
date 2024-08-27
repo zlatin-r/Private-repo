@@ -8,7 +8,6 @@
         <div class="login-register-box">
             <h1>Petstagram</h1>
 
-            <!-- Start Register Form -->
             <form action="">
                 <input type="text" placeholder="Username">
 
@@ -18,16 +17,13 @@
 
                 <input type="password" placeholder="Repeat Password">
 
-                <!-- Register Button -->
                 <button type="submit">Register</button>
             </form>
-            <!-- End Register Form -->
 
         </div>
         <div class="second-option">
 
-            <!-- Link to Login Page -->
-            <p>Have an account? <a href="#">Log in</a></p>
+            <p>Have an account? <a href="{% url 'signin user' %}">Log in</a></p>
         </div>
     </div>
 
