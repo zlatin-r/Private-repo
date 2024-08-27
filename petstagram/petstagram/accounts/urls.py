@@ -9,9 +9,10 @@ urlpatterns = (
     path("signout/", signout_user, name="signout user"),
 
     path(
-         "profile/<int:pk>/", include([
+        "profile/<int:pk>/", include([
             path("", details_profile, name="details profile"),
             path("edit/", edit_profile, name="edit profile"),
             path("delete/", delete_profile, name="delete profile"),
-    ]))
+        ])
+    )
 )

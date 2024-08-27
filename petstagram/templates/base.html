@@ -1,7 +1,7 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}">
@@ -12,34 +12,42 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="#">
-                    <img width="50px" src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}"
-                         alt="img1">
+                <a href="{% url 'index' %}">
+                    <img width="50px" src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}" alt='img1'>
                 </a>
-                <a class="home" href="#">
+                <a class="home" href="{% url 'index' %}">
                     <i>Petstagram</i>
                 </a>
             </div>
             <div class="nav-links">
                 <ul class="nav-group">
                     <li class="nav-item">
-
-                        <a href="#">
+                        <a href="{% url 'create pet' %}">
                             <i>Add Pet</i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="{% url 'create photo' %}">
                             <i>Add Photo</i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="{% url 'signin user' %}">
+                            <i>Login</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'signup user' %}">
+                            <i>Register</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'details profile' pk=2 %}">
                             <i>Profile</i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="{% url 'signout user' %}">
                             <i>Log out</i>
                         </a>
                     </li>
@@ -50,7 +58,7 @@
 </header>
 <main>
     {% block main_content %}
-        
+
     {% endblock %}
 </main>
 <div class="footer">
