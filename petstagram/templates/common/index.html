@@ -13,7 +13,7 @@
                 <img src="{% static '/images/search.png' %}" height="18" alt="img2">
             </button>
         </form>
-        {% include "partials/pet-photos-list.html" %}
+        {% include "partials/pet_photos_list.html" with photo_list=pet_photos %}
     </div>
 </div>
 
