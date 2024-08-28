@@ -18,3 +18,5 @@ def details_photo(request, pk):
 def edit_photo(request, pk):
     context = {}
     return render(request, "photos/edit_photo.html", context)
+
+
