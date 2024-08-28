@@ -29,11 +29,14 @@
         <div class="actionBtns">
             <div class="left">
                 <span class="heart">
-                                <a href="{% url 'like_pet_photo' pk=photo.pk %}">
-                                    <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
-                                    <i class="fa-regular fa-heart"></i>
-                                </a>
-                            </span>
+                    <a href="{% url 'like_pet_photo' pk=photo.pk %}">
+                        {% if photo.photolike_set.count > 0s %}
+                            <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
+                        {% else %}
+                            <i class="fa-regular fa-heart"></i>
+                        {% endif %}
+                    </a>
+                </span>
                 <a href="#">
                     <i class="fa-solid fa-share"></i>
                 </a>
