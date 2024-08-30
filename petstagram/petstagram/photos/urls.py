@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from petstagram.common import views
+from petstagram.photos import views
 
 urlpatterns = (
     path("add/", views.add_photo, name="add photo"),
