@@ -30,3 +30,4 @@ def edit_profile(request, pk):
 def delete_profile(request, pk):
     context = {}
     return render(request, "accounts/delete_profile.html", context)
+
