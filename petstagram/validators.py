@@ -15,3 +15,5 @@ class MaxSizeValidator(BaseValidator):
 
     def compare(self, file_size, max_size):
         return file_size > max_size
+
+
