@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'petstagram.photos.apps',
-    'petstagram.pets.apps',
-    'petstagram.accounts.apps',
-    'petstagram.common.apps',
+    'petstagram.photos',
+    'petstagram.pets',
+    'petstagram.accounts',
+    'petstagram.common',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +125,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
