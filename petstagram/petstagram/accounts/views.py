@@ -10,7 +10,7 @@ def login(request):
     return render(request, "accounts/login-page.html")
 
 def logout(request):
-    return redirect("home-page")
+    return redirect("index")
 
 
 def show_profile_details(request, pk):
