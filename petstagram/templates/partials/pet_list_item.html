@@ -1,7 +1,6 @@
 {% load static %}
 
 <div class="card">
-
     <div class="top">
         <div class="userDetails">
             <a href="{% url 'profile details' pk=1 %}">
@@ -55,7 +54,7 @@
                 <b>Some other fish</b>
             </p>
         </a>
-        <a href="#">
+        <a href="{% url 'details photo' pk=photo.pk %}">
             <h4 class="details">See details</h4>
         </a>
         <h5 class="postTime">{{ photo.created_at|date:'d/m/Y' }}19/09/2022</h5>
