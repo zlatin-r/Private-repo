@@ -29,7 +29,7 @@
             <div class="left">
                 <span class="heart">
                     <a href="{% url 'like_pet_photo' pk=photo.pk %}">
-                        {% if photo.photolike_set.count > 0s %}
+                        {% if photo.photolike_set.count > 0 %}
                             <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                         {% else %}
                             <i class="fa-regular fa-heart"></i>
