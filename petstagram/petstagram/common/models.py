@@ -18,8 +18,8 @@ class Comment(models.Model):
     )
 
 
-class Like(models.Model):
-    to_photo = models.ForeignKey(
+class PhotoLike(models.Model):
+    pet_photo = models.ForeignKey(
         to=Photo,
         on_delete=models.CASCADE
     )

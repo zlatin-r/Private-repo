@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from petstagram.photos.models import Photo
 
 
@@ -17,3 +16,6 @@ def details_photo(request, pk):
 
 def edit_photo(request, pk):
     return render(request, "photos/photo-edit-page.html")
+
+
+
