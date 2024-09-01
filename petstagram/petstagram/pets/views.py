@@ -47,6 +47,10 @@ def delete_pet(request, username, pet_slug):
     pet = Pet.objects.get(slug=pet_slug)
     pet_form = PetDeleteForm(request.POST or None, instance=pet)
 
+    if request.method == 'POST':
+        pet_form.save()
+        return redirect("index")
+
     context = {
         "pet_form": pet_form,
         "username": username,

@@ -16,9 +16,11 @@
             <a class="btn btn-primary" href="javascript:history.back()">
                 <button class="edit-btn" type="button">Go back</button>
             </a>
+            
+            {% csrf_token %}
         </form>
         <!-- End Delete Pet Form -->
-        {% csrf_token %}
+        
     </div>
 
 {% endblock %}
