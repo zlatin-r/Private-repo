@@ -32,10 +32,16 @@ class PetEditForm(PetBaseForm):
 
         self.fields["date_of_birth"].widget.attrs["readonly"] = "readonly"
 
-    def clean_date_of_birth(self):  # Validate date_of_birth
-        date_of_birth = self.cleaned_data["date_of_birth"]
+    def clean_date_of_birth(self):  # Validate date_of_birth. Cant be edited true the HTML
 
-        if date_of_birth != self.instance.date_of_birth:
-            raise ValidationError("Date of birth is readonly")
+        # date_of_birth = self.cleaned_data["date_of_birth"]
+        #
+        # if date_of_birth != self.instance.date_of_birth:
+        #     raise ValidationError("Date of birth is readonly")
+        # return date_of_birth
 
-        return date_of_birth
+        return self.instance.date_of_birth  # returns every time the true date of birth
+
+
+class PetDeleteForm(PetBaseForm):
+    pass
