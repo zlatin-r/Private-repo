@@ -1,11 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from petstagram.pets.forms import PetCreateForm, PetEditForm
 from petstagram.pets.models import Pet
 
 
 # Create your views here.
-def add_pet(request):
-    context = {}
+def create_pet(request):
+    pet_form = PetCreateForm(request.POST or None)
+
+    if request.method == 'POST':
+        if pet_form.is_valid():
+            created_pet = pet_form.save()
+            return redirect("details pet", username="admin", pet_slug=created_pet.slug)
+
+    context = {
+        "pet_form": pet_form,
+    }
     return render(request, "pets/pet-add-page.html", context)
 
 
@@ -17,7 +27,9 @@ def details_pet(request, username, pet_slug):
 
 
 def edit_pet(request, username, pet_slug):
-    context = {}
+    context = {
+        "pet_form": PetEditForm(),
+    }
     return render(request, "pets/pet-edit-page.html", context)
 
 

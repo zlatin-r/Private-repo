@@ -3,8 +3,16 @@ from django import forms
 from petstagram.pets.models import Pet
 
 
-class PetForm(forms.ModelForm):
+class PetBaseForm(forms.ModelForm):
     class Meta:
         model = Pet
 
-        fields = ("name", "pet_photo", "date_of_birth")
+        fields = ("name", "date_of_birth", "pet_photo",)
+
+
+class PetCreateForm(PetBaseForm):
+    pass
+
+
+class PetEditForm(PetBaseForm):
+    pass
