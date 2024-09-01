@@ -14,12 +14,12 @@ class Comment(models.Model):
     )
     to_photo = models.ForeignKey(
         to=Photo,
-        on_delete=models.DO_NOTHING()
+        on_delete=models.DO_NOTHING
     )
 
 
 class PhotoLike(models.Model):
     pet_photo = models.ForeignKey(
         to=Photo,
-        on_delete=models.DO_NOTHING()
+        on_delete=models.DO_NOTHING
     )
