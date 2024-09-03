@@ -56,6 +56,8 @@ class PetDeleteForm(ReadOnlyFieldFormMixin, PetBaseForm):
 
     def save(self, commit=True):
         if commit:
+            # self.instance.comment.delete()
+            # self.instance.like.delete()
             self.instance.delete()
 
         return self.instance
