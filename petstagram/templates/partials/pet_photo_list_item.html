@@ -41,23 +41,23 @@
                 </a>
             </div>
         </div>
+
         <p class="likes">{{ photo.photolike_set.count }} likes</p>
-        {% for pet in photo.pets.all %}
+
+        {% for pet in photo.tagged_pets.all %}
             <a href="{% url 'details pet' username='zlatin' pet_slug=pet.slug %}">
                 <p class="message">
                     <b>{{ pet.name }}</b>
                 </p>
             </a>
         {% endfor %}
-        <a href="{% url 'details photo' pk=photo.pk %}">
-            <p class="message">
-                <b>Some other fish</b>
-            </p>
-        </a>
+
         <a href="{% url 'details photo' pk=photo.pk %}">
             <h4 class="details">See details</h4>
         </a>
+
         <h5 class="postTime">{{ photo.created_at|date:'d/m/Y' }}19/09/2022</h5>
+
         <div class="addComments">
             <form method="post" action="#">
                 <label for="id_body">Body:</label>
