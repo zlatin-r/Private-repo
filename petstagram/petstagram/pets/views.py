@@ -73,6 +73,12 @@ class PetEditView(views.UpdateView):
         contex["username"] = "admin"
         return contex
 
+    def get_success_url(self):
+        return reverse("details pet",
+                       kwarg={
+                           "username" :self.request.GET.get("username"),
+                           "pet_slug": self.object.slug})
+
 
 def delete_pet(request, username, pet_slug):
     pet = Pet.objects.get(slug=pet_slug)
