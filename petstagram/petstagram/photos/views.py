@@ -10,7 +10,7 @@ def add_photo(request):
     context = {
         'pets': pets,
     }
-    return render(request, "photos/photo-add-page.html")
+    return render(request, "photos/photo-add-page.html", context)
 
 
 def details_photo(request, pk):

@@ -113,11 +113,16 @@ class PetDeleteView(views.DeleteView):
         "username": "admin",
     }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_form_kwargs(self):
+        kwargs=super().get_form_kwargs()
+        kwargs["instance"]=self.object
+        return kwargs
 
-        form = self.form_class(instance=self.object)
-
-        context["form"] = form
-
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #
+    #     form = self.form_class(instance=self.object)
+    #
+    #     context["form"] = form
+    #
+    #     return context
