@@ -22,6 +22,7 @@ def like_pet_photo(request, pk):
     # pet_photo = Photo.objects.get(pk=pk, user=request.user)
     # pet_photo = Photo.objects.get(pk=pk)
     # pet_photo_like = PhotoLike.objects.first(pk=pk, user=request.user)
+
     pet_photo_like = PhotoLike.objects.filter(pet_photo_id=pk).first()
 
     if pet_photo_like:
