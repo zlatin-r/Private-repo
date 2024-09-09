@@ -27,10 +27,9 @@
                 <label for="pets">Tag Pets:</label>
 
                 <select name="pets" id="id_tagged_pets" multiple>
-                    <option>Sasho</option>
-                    <option>Perry</option>
-                    <option>Bucky</option>
-                    <option>Steve</option>
+                    {% for pet in pets %}
+                        <option value="{{ pet.pk }}">{{ pet.name }}</option>
+                    {% endfor %}
                 </select>
             </p>
             <!-- Add Photo Button -->

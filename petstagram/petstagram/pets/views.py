@@ -1,6 +1,6 @@
 from audioop import reverse
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from petstagram.pets.forms import PetEditForm, PetCreateForm, PetDeleteForm
 from petstagram.pets.models import Pet
@@ -29,7 +29,10 @@ class PetCreateView(views.CreateView):
     template_name = "pets/pet-add-page.html"
 
     def get_success_url(self):
-        return reverse("details pet", kwargs={"username": "admin", "pet_slug": self.object.slug})
+        return reverse("details pet", kwargs={
+            "username": "admin",
+            "pet_slug": self.object.slug
+        })
 
 
 # def details_pet(request, username, pet_slug):
@@ -109,3 +112,12 @@ class PetDeleteView(views.DeleteView):
     extra_context = {
         "username": "admin",
     }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        form = self.form_class(instance=self.object)
+
+        context["form"] = form
+
+        return context

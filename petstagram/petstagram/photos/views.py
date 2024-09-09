@@ -1,9 +1,15 @@
 from django.shortcuts import render
+
+from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
 
 
 # Create your views here.
 def add_photo(request):
+    pets = Pet.objects.all()  # Fetch all pets from the database
+    context = {
+        'pets': pets,
+    }
     return render(request, "photos/photo-add-page.html")
 
 
