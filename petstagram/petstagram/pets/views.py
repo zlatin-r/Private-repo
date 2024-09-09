@@ -1,6 +1,6 @@
 from audioop import reverse
 
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic as views
 from petstagram.pets.forms import PetEditForm, PetCreateForm, PetDeleteForm
 from petstagram.pets.models import Pet
@@ -23,7 +23,7 @@ from petstagram.pets.models import Pet
 
 class PetCreateView(views.CreateView):
     # model = Pet
-    # fields = ("name", "date_of_birth", "pet_photo",)
+    # fields = ("name", "date_of_birth", "pet_photo")
 
     form_class = PetCreateForm
     template_name = "pets/pet-add-page.html"
@@ -76,22 +76,36 @@ class PetEditView(views.UpdateView):
     def get_success_url(self):
         return reverse("details pet",
                        kwarg={
-                           "username" :self.request.GET.get("username"),
+                           "username": self.request.GET.get("username"),
                            "pet_slug": self.object.slug})
 
 
-def delete_pet(request, username, pet_slug):
-    pet = Pet.objects.get(slug=pet_slug)
-    pet_form = PetDeleteForm(request.POST or None, instance=pet)
+# def delete_pet(request, username, pet_slug):
+#     pet = Pet.objects.get(slug=pet_slug)
+#     pet_form = PetDeleteForm(request.POST or None, instance=pet)
+#
+#     if request.method == 'POST':
+#         pet_form.save()
+#         return redirect("index")
+#
+#     context = {
+#         "pet_form": pet_form,
+#         "username": username,
+#         "pet": pet,
+#     }
+#
+#     return render(request, "pets/pet-delete-page.html", context)
 
-    if request.method == 'POST':
-        pet_form.save()
-        return redirect("index")
+class PetDeleteView(views.DeleteView):
+    model = Pet
+    form_class = PetDeleteForm
 
-    context = {
-        "pet_form": pet_form,
-        "username": username,
-        "pet": pet,
+    template_name = "pets/pet-delete-page.html"
+
+    slug_url_kwarg = "pet_slug"
+
+    success_url = reverse_lazy("index")
+
+    extra_context = {
+        "username": "admin",
     }
-
-    return render(request, "pets/pet-delete-page.html", context)
