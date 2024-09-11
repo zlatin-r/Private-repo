@@ -19,8 +19,20 @@ from petstagram.photos.models import Photo
 #     return render(request, "common/index.html", context)
 
 class IndexView(views.ListView):
-    queryset = Photo.objects.all()
+    queryset = Photo.objects.all() \
+    .prefetch_related("tagged_pets") \
+    .prefetch_related("photolike_set")
+
     template_name = 'common/index.html'
+    
+    @property
+    def pet_name_pattern(self):
+        return self.request.GET.get('pet_name_pattern', None)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["pet_name_patter"] = self.pet_name_pattern
+        return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -30,7 +42,7 @@ class IndexView(views.ListView):
         return queryset
 
     def filter_by_pet_name_pattern(self, queryset):
-        pet_name_pattern = self.request.GET.get('pet_name_pattern', '')
+        pet_name_pattern = self.pet_name_pattern
 
         filter_query = {}
 
