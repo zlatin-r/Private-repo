@@ -1,22 +1,44 @@
 from django.shortcuts import render, redirect
-
+from django.views import generic as views
 from petstagram.common.models import PhotoLike
 from petstagram.photos.models import Photo
 
 
-def index(request):
-    pet_name_pattern = request.GET.get('pet_name_pattern', '')
+# def index(request):
+#     pet_name_pattern = request.GET.get('pet_name_pattern', '')
+#
+#     pet_photos = Photo.objects.all()
+#
+#     if pet_name_pattern:
+#         pet_photos = pet_photos.filter(name__icontains=pet_name_pattern)
+#
+#     context = {
+#         "pet_photos": pet_photos,
+#         "pet_name_pattern": pet_name_pattern,
+#     }
+#     return render(request, "common/index.html", context)
 
-    pet_photos = Photo.objects.all()
+class IndexView(views.ListView):
+    queryset = Photo.objects.all()
+    template_name = 'common/index.html'
 
-    if pet_name_pattern:
-        pet_photos = pet_photos.filter(tagged_pets__name__icontains=pet_name_pattern)
+    def get_queryset(self):
+        queryset = super().get_queryset()
 
-    context = {
-        "pet_photos": pet_photos,
-        "pet_name_pattern": pet_name_pattern,
-    }
-    return render(request, "common/index.html", context)
+        queryset = self.filter_by_pet_name_pattern(queryset)
+
+        return queryset
+
+    def filter_by_pet_name_pattern(self, queryset):
+        pet_name_pattern = self.request.GET.get('pet_name_pattern', '')
+
+        filter_query = {}
+
+        if pet_name_pattern:
+            filter_query['tagged_pets__name__icontains'] = pet_name_pattern
+
+        return queryset.filter(**filter_query)
+
 
 def like_pet_photo(request, pk):
     # pet_photo = Photo.objects.get(pk=pk, user=request.user)
