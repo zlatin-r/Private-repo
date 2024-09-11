@@ -44,11 +44,12 @@ class PetCreateView(views.CreateView):
 class PetDetailsView(views.DetailView):
     # model = Pet
 
-    queryset = Pet.objects.all(). \
-        prefetch_related("photo_set") \
-        # .prefetch_related("photo_set__photolike_set") \
-        # .prefetch_related("photo_set__tagged_pets_set")
-        # TODO try to optimize the queries with prefetch
+    queryset = Pet.objects.all() \
+        . prefetch_related("photo_set") \
+        .prefetch_related("photo_set__photolike_set") \
+        # .prefetch_related("photo_set__tagged_pets") \
+        # .prefetch_related("photo_set__tagged_pets")
+        # TODO try to optimize the queries with prefetch related
 
     template_name = "pets/pet-details-page.html"
     slug_url_kwarg = "pet_slug"
