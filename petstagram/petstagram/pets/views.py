@@ -46,8 +46,9 @@ class PetDetailsView(views.DetailView):
 
     queryset = Pet.objects.all(). \
         prefetch_related("photo_set") \
-        .prefetch_related("photolike_set") \
-        .prefetch_related("photo_set__pets")
+        # .prefetch_related("photo_set__photolike_set") \
+        # .prefetch_related("photo_set__tagged_pets_set")
+        # TODO try to optimize the queries with prefetch
 
     template_name = "pets/pet-details-page.html"
     slug_url_kwarg = "pet_slug"
