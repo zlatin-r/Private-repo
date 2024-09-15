@@ -1,5 +1,3 @@
-from re import search
-
 from django import template
 
 register = template.Library()
