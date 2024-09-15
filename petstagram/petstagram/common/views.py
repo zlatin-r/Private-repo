@@ -24,14 +24,16 @@ class IndexView(views.ListView):
     .prefetch_related("photolike_set")
 
     template_name = 'common/index.html'
-    
+
+    paginate_by = 1
+
     @property
     def pet_name_pattern(self):
         return self.request.GET.get('pet_name_pattern', None)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["pet_name_patter"] = self.pet_name_pattern
+        context["pet_name_pattern"] = self.pet_name_pattern
         return context
 
     def get_queryset(self):
