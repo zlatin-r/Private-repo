@@ -29,7 +29,7 @@ class IndexView(views.ListView):
 
     @property
     def pet_name_pattern(self):
-        return self.request.GET.get('pet_name_pattern', None)
+        return self.request.GET.get('pet_name_pattern', "")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
