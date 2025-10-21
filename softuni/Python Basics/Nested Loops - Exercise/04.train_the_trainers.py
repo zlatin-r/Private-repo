@@ -1,11 +1,12 @@
 n = int(input())
 command = input()
+
+total_score = 0
 counter = 0
 
 while command != "Finish":
 
     avg_score = 0
-    total_score = 0
     sum = 0
 
     for _ in range(n):
@@ -13,9 +14,9 @@ while command != "Finish":
 
         sum += grade
         total_score += grade
+        counter += 1
 
     avg_score = sum / n
-    counter += 1
 
     print(f"{command} - {avg_score:.2f}.")
 
