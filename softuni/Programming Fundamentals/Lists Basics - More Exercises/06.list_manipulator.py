@@ -70,7 +70,6 @@ while command != "end":
 
         if count > len(init_list):
             result = "Invalid count"
-            break
         
         if sub_command == "even":
             for i in range(len(init_list) -1, -1, -1):
