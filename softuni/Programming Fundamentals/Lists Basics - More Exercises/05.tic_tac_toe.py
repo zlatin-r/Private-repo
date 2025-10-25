@@ -1,5 +1,7 @@
 board = [list(map(int, input().split())) for _ in range(3)]
 
+winner = 0
+
 for i in range(3):
     if board[i][0] == board[i][1] == board[i][2] != 0:
         winner = board[i][0]
