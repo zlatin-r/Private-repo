@@ -32,7 +32,6 @@ def course_planning():
                 i1, i2 = schedule.index(lesson), schedule.index(lesson2)
                 schedule[i1], schedule[i2] = schedule[i2], schedule[i1]
 
-                # Handle exercises (move them along with their lessons)
                 ex1, ex2 = f"{lesson}-Exercise", f"{lesson2}-Exercise"
 
                 if ex1 in schedule:
@@ -52,7 +51,6 @@ def course_planning():
                 schedule.append(lesson)
                 schedule.append(exercise)
 
-    # Print final schedule with numbering
     for i, lesson in enumerate(schedule, 1):
         print(f"{i}.{lesson}")
 
