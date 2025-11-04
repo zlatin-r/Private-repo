@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from  skeletons.class_worker import Worker
 
-class TestWorker(TestCase):
+class WorkerTests(TestCase):
     def setUp(self):
         self.worker = Worker("Todor", 20_200, 200)
 

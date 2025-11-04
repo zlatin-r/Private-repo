@@ -1,6 +1,6 @@
 import subprocess
 
-def git_auto_push(message="solutions added", branch="main"):
+def git_auto_push(message="solution added", branch="main"):
     try:
         # Stage all changes
         subprocess.run(["git", "add", "."], check=True)
