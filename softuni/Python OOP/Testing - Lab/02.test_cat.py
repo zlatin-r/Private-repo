@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-from skeletons.class_test_cat import Cat
+from skeletons.class_cat import Cat
 
 class TestCat(TestCase):
     def setUp(self):
