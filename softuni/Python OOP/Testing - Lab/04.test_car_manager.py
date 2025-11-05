@@ -80,8 +80,30 @@ class TestCar(TestCase):
 
         self.assertEqual("Fuel amount cannot be negative!", str(ex.exception))
 
-    # TODO: write test for refuel and drive...
-    
+    def test_refuel_with_value_more_than_0_fuel_amount_less_than_capacity(self):
+        self.car.refuel(50)
+        self.assertEqual(50, self.car.fuel_amount)
+
+    def test_refuel_with_value_more_than_0_fuel_amount_more_than_capacity(self):
+        self.car.refuel(120)
+        self.assertEqual(self.car.fuel_capacity, self.car.fuel_amount)
+
+    def test_refuel_with_value_less_than_0_raises_exeption(self):
+        with self.assertRaises(Exception) as ex:
+            self.car.refuel(-1)
+
+        self.assertEqual("Fuel amount cannot be zero or negative!", str(ex.exception))
+
+    def test_drive_with_distance_less_than_fuel_needed_amount_reduced(self):
+        self.car.refuel(1000)
+        self.car.drive(10)
+        self.assertEqual(98.5, self.car.fuel_amount)
+
+    def test_drive_without_needed_fuel_raises_exception(self):
+        with self.assertRaises(Exception) as ex:
+            self.car.drive(100)
+
+        self.assertEqual("You don't have enough fuel to drive!", str(ex.exception))
 
 
 if __name__ == "__main__":
