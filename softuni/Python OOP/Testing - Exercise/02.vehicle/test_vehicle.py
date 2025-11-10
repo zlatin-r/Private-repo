@@ -41,5 +41,6 @@ class TestVehicle(TestCase):
         expected = "The vehicle has 200 horse power with 100 fuel left and 1.25 fuel consumption"
         self.assertEqual(expected, self.vehicle.__str__())
 
+
 if __name__ == "__main__":
     main()
