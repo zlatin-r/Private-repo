@@ -27,4 +27,5 @@ class Vehicle:
 
     def __str__(self):
         return f"The vehicle has {self.horse_power} " \
-               f"horse power with {self.fuel} fuel left and {self.fuel_consumption} fuel consumption"
+               f"horse power with {self.fuel}" \
+               f"fuel left and {self.fuel_consumption} fuel consumption"

@@ -17,7 +17,7 @@ class TestCar(TestCase):
         self.car.make = "Lada"
         self.assertEqual("Lada", self.car.make)
 
-    def test_make_without_value_raises_exeption(self):
+    def test_make_without_value_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.make = ""
 
@@ -27,7 +27,7 @@ class TestCar(TestCase):
         self.car.model = "Samara"
         self.assertEqual("Samara", self.car.model)
 
-    def test_model_without_value_raises_exeption(self):
+    def test_model_without_value_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.model = ""
 
@@ -44,7 +44,7 @@ class TestCar(TestCase):
 
         self.assertEqual("Fuel consumption cannot be zero or negative!", str(ex.exception))
 
-    def test_fuel_consumption_with_value_less_than_0_raises_exeption(self):
+    def test_fuel_consumption_with_value_less_than_0_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.fuel_consumption = -1
 
@@ -54,13 +54,13 @@ class TestCar(TestCase):
         self.car.fuel_capacity = 1
         self.assertEqual(1, self.car.fuel_capacity)
 
-    def test_fuel_capacity_with_value_equal_to_0_raises_exeption(self):
+    def test_fuel_capacity_with_value_equal_to_0_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.fuel_capacity = 0
 
         self.assertEqual("Fuel capacity cannot be zero or negative!", str(ex.exception))
 
-    def test_fuel_capacity_with_value_less_than_0_raises_exeption(self):
+    def test_fuel_capacity_with_value_less_than_0_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.fuel_capacity = -1
 
@@ -74,7 +74,7 @@ class TestCar(TestCase):
         self.car.fuel_amount = 0
         self.assertEqual(0, self.car.fuel_amount)
 
-    def test_fuel_amount_with_value_less_than_0_raises_exeption(self):
+    def test_fuel_amount_with_value_less_than_0_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.fuel_amount = -1
 
@@ -88,7 +88,7 @@ class TestCar(TestCase):
         self.car.refuel(120)
         self.assertEqual(self.car.fuel_capacity, self.car.fuel_amount)
 
-    def test_refuel_with_value_less_than_0_raises_exeption(self):
+    def test_refuel_with_value_less_than_0_raises_exception(self):
         with self.assertRaises(Exception) as ex:
             self.car.refuel(-1)
 
