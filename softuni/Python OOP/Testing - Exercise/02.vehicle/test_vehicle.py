@@ -4,7 +4,7 @@ from vehicle import Vehicle
 
 class TestVehicle(TestCase):
     def setUp(self):
-        self.vehicle = Vehicle(100.0, 200.0)
+        self.vehicle = Vehicle(100, 200)
 
     def test_correct_init(self):
         self.assertEqual(100, self.vehicle.fuel)
@@ -32,7 +32,14 @@ class TestVehicle(TestCase):
         self.assertEqual(70, self.vehicle.fuel)
 
     def test_refuel_with_fuel_more_than_capacity_raises_exception(self):
+        with self.assertRaises(Exception) as ex:
+            self.vehicle.refuel(120)
 
+        self.assertEqual("Too much fuel", str(ex.exception))
+
+    def test_str_method_message_returns_string(self):
+        expected = "The vehicle has 200 horse power with 100 fuel left and 1.25 fuel consumption"
+        self.assertEqual(expected, self.vehicle.__str__())
 
 if __name__ == "__main__":
     main()
