@@ -5,6 +5,7 @@ from hero import Hero
 class TestHero(TestCase):
     def setUp(self):
         self.hero = Hero("Ivan", 10, 100, 10)
+        self.enemy_hero = Hero("enemy", 10, 100, 10)
 
     def test_correct_init(self):
         self.assertEqual("Ivan", self.hero.username)
@@ -13,9 +14,10 @@ class TestHero(TestCase):
         self.assertEqual(10, self.hero.damage)
 
     def test_battle_with_correct_name_and_hero_and_enemy_health_more_than_0_hero_wins(self):
-        enemy_hero = Hero("enemy", 9, 100, 5)
+        self.enemy_hero.level = 9
+        self.enemy_hero.damage = 5
 
-        result = self.hero.battle(enemy_hero)
+        result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("You win", result)
         self.assertEqual(11, self.hero.level)
@@ -24,30 +26,42 @@ class TestHero(TestCase):
 
     def test_battle_with_correct_name_hero_and_enemy_health_more_than_0_hero_lose(self):
         self.hero.damage = 5
-        enemy_hero = Hero("enemy", 11, 100, 15)
+        self.enemy_hero.level = 11
+        self.enemy_hero.damage = 15
 
-        result = self.hero.battle(enemy_hero)
+        result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("You lose", result)
-        self.assertEqual(12, enemy_hero.level)
-        self.assertEqual(55, enemy_hero.health)
-        self.assertEqual(20, enemy_hero.damage)
+        self.assertEqual(12, self.enemy_hero.level)
+        self.assertEqual(55, self.enemy_hero.health)
+        self.assertEqual(20, self.enemy_hero.damage)
 
     def test_battle_with_correct_name_hero_and_enemy_health_more_than_0_battle_draw(self):
-        enemy_hero = Hero("enemy", 10, 100, 10)
-
-        result = self.hero.battle(enemy_hero)
+        result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("Draw", result)
 
     def test_battle_with_same_hero_and_enemy_hero_names_raises_exception(self):
-        enemy_hero = Hero("Ivan", 10, 100, 10)
+        with self.assertRaises(Exception) as ex:
+            self.hero.battle(self.hero)
+
+        self.assertEqual("You cannot fight yourself", str(ex.exception))
+
+    def test_battle_with_correct_name_hero_health_less_than_0_raises_exception(self):
+        self.hero.health = 0
 
         with self.assertRaises(Exception) as ex:
-            self.hero.battle(enemy_hero)
+            self.hero.battle(self.enemy_hero)
 
-        self.assertEqual("You cannot fight yourself")
+        self.assertEqual("Your health is lower than or equal to 0. You need to rest", str(ex.exception))
 
+    def test_battle_with_correct_name_enemy_health_less_than_0_raises_exception(self):
+        self.enemy_hero.health = 0
+
+        with self.assertRaises(Exception) as ex:
+            self.hero.battle(self.enemy_hero)
+
+        self.assertEqual("You cannot fight enemy. He needs to rest", str(ex.exception))
 
 if __name__ == "__main__":
     main()
