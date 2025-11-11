@@ -63,5 +63,13 @@ class TestHero(TestCase):
 
         self.assertEqual("You cannot fight enemy. He needs to rest", str(ex.exception))
 
+    def test_correct__str__(self):
+        expected_result = f"Hero {self.hero.username}: {self.hero.level} lvl\n" \
+                          f"Health: {self.hero.health}\n" \
+                          f"Damage: {self.hero.damage}\n"
+
+        self.assertEqual(expected_result, str(self.hero))
+
+
 if __name__ == "__main__":
     main()
