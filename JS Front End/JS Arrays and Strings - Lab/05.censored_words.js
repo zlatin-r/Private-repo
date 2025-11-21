@@ -1,12 +1,9 @@
 function solve(text, word) {
 
-    let censoredText = text;
-    const stars = '*'.repeat(word.length);
-
-    while (censoredText.includes(word)) {
-        censoredText = censoredText.replace(word, stars);
+    while (text.includes(word)) {
+        text = text.replace(word, "*".repeat(word.length));
     }
-    console.log(censoredText);
+    console.log(text);
 }
 
 solve('A small sentence with some words', 'small')
