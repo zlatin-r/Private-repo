@@ -1,12 +1,16 @@
 function solve(a, b, op) {
+    let result;
+
     switch (op) {
         case "multiply":
-            console.log(a * b); break;
+            result = (x, y) => x * y; break;
         case "divide":
-            console.log(a / b); break;
+            result = (x, y) => x / y; break;
         case "add":
-            console.log(a + b); break;
+            result = (x, y) => x + y; break;
         case "subtract":
-            console.log(a - b); break;
+            result = (x, y) => x - y; break;
     }
+
+    console.log(result(a, b));
 }
