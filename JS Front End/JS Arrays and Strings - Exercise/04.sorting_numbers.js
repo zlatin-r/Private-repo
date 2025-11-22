@@ -1,19 +1,14 @@
 function solve(arr) {
+    arr.sort((a, b) => a - b);
+
     let result = [];
-    let left = 0;
-    let right = arr.length - 1;
 
-    arr.sort((a, b) => a - b)
+    while (arr.length > 0) {
+        result.push(arr.shift());
 
-    while (left <= right) {
-        if (left === right) {
-            result.push(arr[left]);
-        } else {
-            result.push(arr[left]);
-            result.push(arr[right]);
+        if (arr.length > 0) {
+            result.push(arr.pop());
         }
-        left++;
-        right--;
     }
     return result;
 }
