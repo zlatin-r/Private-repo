@@ -1,9 +1,27 @@
 function movies(arr) {
-    let movies = {};
-    for (let i = 0; i < arr.length; i++) {
-        let tokens = arr[i].split(' ');
-        let action = tokens.shift()
+    let movies = [];
+
+    for (let info of arr) {
+        if (info.includes("addMovie")) {
+            let movieName = info.replace("addMovie ", "");
+            movies.push({name: movieName});
+        } else if (info.includes("directedBy")) {
+            let [movieName, director] = info.split(" directedBy ");
+            let movie = movies.find(movie => movie.name === movieName);
+            if (movie) {
+                movie.director = director;
+            }
+        } else if (info.includes("onDate")) {
+            let [movieName, date] = info.split(" onDate ");
+            let movie = movies.find(movie => movie.name === movieName);
+            if (movie) {
+                movie.date = date;
+            }
+        }
     }
+    movies
+        .filter(movie => movie.name && movie.director && movie.date)
+        .forEach(movie => console.log(JSON.stringify(movie)));
 }
 
 movies([
