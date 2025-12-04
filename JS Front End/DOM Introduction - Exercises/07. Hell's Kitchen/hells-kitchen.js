@@ -1,46 +1,46 @@
 function solve() {
     const inputData = JSON.parse(document.querySelector("#inputs textarea").value);
-    const restaurantsData = {};
-    const bestRestaurant = {name: "", highestSalary: 0, personal: {}};
-    const outputRestaurantDataElement = document.querySelector("#bestRestaurant > p");
-    const outputEmployeesDataElement = document.querySelector("#workers > p");
 
-    inputData.forEach(element => {
-        const [restaurantName, personalInfo] = element.split(' - ');
-        const employeesData = personalInfo.split(', ');
+    const restaurants = {};
+    const outputRestaurantDataElement = document.querySelector("#bestRestaurant p");
+    const outputEmployeesDataElement = document.querySelector("#workers p");
 
-        if (!restaurantsData.hasOwnProperty(restaurantName)) {
-            restaurantsData[restaurantName] = {};
-            restaurantsData[restaurantName]["employees"] = {};
+    inputData.forEach(entry => {
+        let [name, workers] = entry.split(" - ");
+        let workerList = workers.split(", ");
+
+        if (!restaurants[name]) {
+            restaurants[name] = {employees: {}, avgSalary: 0, bestSalary: 0};
         }
-        employeesData.forEach(employee => {
-            const [name, salary] = employee.split(' ');
-            restaurantsData[restaurantName]["employees"][name] = parseFloat(salary);
+
+        workerList.forEach(person => {
+            let [workerName, salary] = person.split(" ");
+            salary = Number(salary);
+
+            restaurants[name].employees[workerName] = salary;
         });
+
+        let allSalaries = Object.values(restaurants[name].employees);
+        let total = allSalaries.reduce((a, b) => a + b, 0);
+
+        restaurants[name].avgSalary = total / allSalaries.length;
+        restaurants[name].bestSalary = Math.max(...allSalaries);
     });
 
-    Object.entries(restaurantsData).forEach(([restaurant, data]) => {
-        const salaries = Object.values(data.employees);
-        const totalSalaries = salaries.reduce((sum, salary) => sum + salary, 0);
-        const avgSalary = (totalSalaries / salaries.length).toFixed(2);
-        const highestSalary = Math.max(...salaries).toFixed(2);
+    let best = Object.entries(restaurants)
+        .sort((a, b) => b[1].avgSalary - a[1].avgSalary)[0];
 
-        if (Number(avgSalary) > Number(bestRestaurant.avgSalary)) {
-            bestRestaurant.name = restaurant;
-            bestRestaurant.avgSalary = avgSalary;
-            bestRestaurant.highestSalary = highestSalary;
-            bestRestaurant.personal = data.employees;
-        }
-    });
+    let [bestName, bestData] = best;
 
-    const sortedEmployees = Object.entries(bestRestaurant.personal)
-        .sort(([, a], [, b]) => b - a);    // .sort((a, b) => b[1] - a[1]);
+    let sortedWorkers = Object.entries(bestData.employees)
+        .sort((a, b) => b[1] - a[1]);
 
-    outputRestaurantDataElement.textContent = `Name: ${bestRestaurant.name} `;
-    outputRestaurantDataElement.textContent += `Average Salary: ${bestRestaurant.avgSalary} `;
-    outputRestaurantDataElement.textContent += `Best Salary: ${bestRestaurant.highestSalary}`;
+    outputRestaurantDataElement.textContent =
+        `Name: ${bestName} ` +
+        `Average Salary: ${bestData.avgSalary.toFixed(2)} ` +
+        `Best Salary: ${bestData.bestSalary.toFixed(2)}`;
 
-    outputEmployeesDataElement.textContent = sortedEmployees
+    outputEmployeesDataElement.textContent = sortedWorkers
         .map(([name, salary]) => `Name: ${name} With Salary: ${salary}`)
-        .join(' ');
+        .join(" ");
 }
