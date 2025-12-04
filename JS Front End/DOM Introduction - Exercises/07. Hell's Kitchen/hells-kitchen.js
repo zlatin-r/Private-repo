@@ -6,13 +6,12 @@ function solve() {
     const outputRestaurantDataElement = document.querySelector("#bestRestaurant p");
     const outputEmployeesDataElement = document.querySelector("#workers p");
 
-    // Process all restaurant entries
     inputData.forEach(entry => {
         let [name, workers] = entry.split(" - ");
         let workerList = workers.split(", ");
 
         if (!restaurants[name]) {
-            restaurants[name] = { employees: {}, avgSalary: 0, bestSalary: 0 };
+            restaurants[name] = {employees: {}, avgSalary: 0, bestSalary: 0};
         }
 
         workerList.forEach(person => {
@@ -22,7 +21,6 @@ function solve() {
             restaurants[name].employees[workerName] = salary;
         });
 
-        // Recalculate salaries
         let salaries = Object.values(restaurants[name].employees);
         let total = salaries.reduce((a, b) => a + b, 0);
 
@@ -30,21 +28,17 @@ function solve() {
         restaurants[name].bestSalary = Math.max(...salaries);
     });
 
-    // Find best restaurant
     let best = Object.entries(restaurants)
         .sort((a, b) => b[1].avgSalary - a[1].avgSalary)[0];
 
     let [bestName, bestData] = best;
 
-    // Sort workers by salary descending
     let sortedWorkers = Object.entries(bestData.employees)
         .sort((a, b) => b[1] - a[1]);
 
-    // Output best restaurant
     outputRestaurantDataElement.textContent =
         `Name: ${bestName} Average Salary: ${bestData.avgSalary.toFixed(2)} Best Salary: ${bestData.bestSalary.toFixed(2)}`;
 
-    // Output employees
     outputEmployeesDataElement.textContent =
         sortedWorkers
             .map(([name, salary]) => `Name: ${name} With Salary: ${salary}`)
