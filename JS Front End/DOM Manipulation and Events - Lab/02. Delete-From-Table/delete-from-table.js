@@ -1,3 +1,5 @@
 function deleteByEmail() {
-    //TODO
+    let email = document.getElementsByName('email')[0].value;
+    
+    console.log(email)
 }
