@@ -6,4 +6,6 @@ function addItem() {
     newLiElement.textContent = inputText;
 
     listEl.appendChild(newLiElement);
+
+    document.querySelector('#newItemText').value = '';
 }
