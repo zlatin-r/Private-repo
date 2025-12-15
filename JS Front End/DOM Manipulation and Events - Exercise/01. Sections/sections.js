@@ -1,15 +1,29 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-   let inputText = document.querySelector('#task-input input[type="text"]').value;
-   let resultContent = document.querySelector('#content');
-   let sections = inputText.split(', ');
 
-   sections.forEach(section => {
-       let newDivElement = document.createElement('div');
-       let newParagraph = document.createElement('p');
+    const contendElement = document.querySelector('#content');
+    const generateElement = document.querySelector('input[type="submit"]');
 
-       newDivElement.appendChild(newParagraph);
-       resultContent.appendChild(newDivElement);
-   });
+    generateElement.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const inputStrings = document.querySelector('input[type="text"]').value.split(', ');
+
+        inputStrings.forEach((str) => {
+
+            const newDiv = document.createElement('div');
+            const newParagraph = document.createElement('p');
+
+            newParagraph.textContent = str;
+            newParagraph.style.display = 'none';
+
+            newDiv.appendChild(newParagraph);
+            newDiv.addEventListener('click', (e) => {
+                e.target.querySelector('p').style.display = 'block';
+            });
+
+            contendElement.appendChild(newDiv);
+        });
+    });
 }

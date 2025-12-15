@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    //TODO
+    let inputValue = document.querySelector('input');
 }
