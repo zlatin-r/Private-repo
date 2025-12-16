@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', solve);
+document.addEventListener('DOMContentLoaded', solve)
 
 function solve() {
     const allButtons = document.querySelectorAll('input[type="submit"]');
