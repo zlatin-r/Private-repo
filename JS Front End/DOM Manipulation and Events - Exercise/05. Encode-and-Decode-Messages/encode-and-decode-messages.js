@@ -1,44 +1,33 @@
 document.addEventListener('DOMContentLoaded', solve);
 
-function encode(text) {
-    let result = '';
-
-    for (let i = 0; i < text.length; i++) {
-        const charCode = text.charCodeAt(i);
-        result += String.fromCharCode(charCode + 1);
-    }
-
-    return result;
-}
-
-function decode(text) {
-    let result = '';
-
-    for (let i = 0; i < text.length; i++) {
-        const charCode = text.charCodeAt(i);
-        result += String.fromCharCode(charCode - 1);
-    }
-
-    return result;
-}
-
 function solve() {
-    let message = document.querySelector('#encode textarea');
-    let receivedMessage = document.querySelector('#decode textarea');
+    const textareas = document.querySelectorAll('textarea');
+    const buttons = document.querySelectorAll('button');
 
-    const encodeBtn = document.querySelector('#encode button');
-    const decodeBtn = document.querySelector('#decode button');
+    const sender = textareas[0];
+    const receiver = textareas[1];
 
-    encodeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+    const encodeBtn = buttons[0];
+    const decodeBtn = buttons[1];
 
-        receivedMessage.value = encode(message.value);
-        message.value = "";
-    })
+    encodeBtn.addEventListener('click', () => {
+        let encoded = '';
 
-    decodeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+        for (let ch of sender.value) {
+            encoded += String.fromCharCode(ch.charCodeAt(0) + 1);
+        }
 
-        receivedMessage.value = decode(receivedMessage.value);
-    })
+        receiver.value = encoded;
+        sender.value = '';
+    });
+
+    decodeBtn.addEventListener('click', () => {
+        let decoded = '';
+
+        for (let ch of receiver.value) {
+            decoded += String.fromCharCode(ch.charCodeAt(0) - 1);
+        }
+
+        receiver.value = decoded;
+    });
 }
