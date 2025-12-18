@@ -5,46 +5,45 @@ function solve() {
     const generateBtn = document.querySelector('#input input[type="submit"]');
     const buyBtn = document.querySelector('#shop input[type="submit"]');
     const tableBody = document.querySelector('#shop table tbody');
+    const outputTextarea = document.querySelector('#shop textarea');
 
     generateBtn.addEventListener('click', (e) => {
         e.preventDefault();
-
-        tableBody.innerHTML = '';
 
         const data = JSON.parse(inputTextarea.value);
 
         for (const item of data) {
             const row = document.createElement('tr');
 
-            // IMAGE
+            // Image
             const imgTd = document.createElement('td');
             const img = document.createElement('img');
             img.src = item.img;
             imgTd.appendChild(img);
             row.appendChild(imgTd);
 
-            // NAME
+            // Name
             const nameTd = document.createElement('td');
             const nameP = document.createElement('p');
             nameP.textContent = item.name;
             nameTd.appendChild(nameP);
             row.appendChild(nameTd);
 
-            // PRICE
+            // Price
             const priceTd = document.createElement('td');
             const priceP = document.createElement('p');
             priceP.textContent = item.price;
             priceTd.appendChild(priceP);
             row.appendChild(priceTd);
 
-            // DECORATION FACTOR
+            // Decoration factor
             const decTd = document.createElement('td');
             const decP = document.createElement('p');
             decP.textContent = item.decFactor;
             decTd.appendChild(decP);
             row.appendChild(decTd);
 
-            // CHECKBOX
+            // Checkbox
             const checkTd = document.createElement('td');
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
@@ -58,20 +57,29 @@ function solve() {
     buyBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const outputEl = document.querySelector('#shop textarea');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        const bought = [];
 
-        const data = [...document.querySelectorAll('table tbody tr')]
-            .filter(row => row.querySelector('input[type="checkbox"]').checked)
-            .map(row => ({
-                name: row.children[1].textContent.trim(),
-                price: Number(row.children[2].textContent),
-                decFactor: Number(row.children[3].textContent)
-            }));
+        for (const row of rows) {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            if (checkbox && checkbox.checked) {
+                const cells = row.children;
+                bought.push({
+                    name: cells[1].textContent,
+                    price: Number(cells[2].textContent),
+                    decFactor: Number(cells[3].textContent)
+                });
+            }
+        }
 
-        let output = `Bought furniture: ${data.map(el => el.name).join(', ')}\n`;
-        output += `Total price: ${data.reduce((sum, el) => sum + el.price, 0).toFixed(2)}\n`;
-        output += `Average decoration factor: ${data.reduce((sum, el) => sum + el.decFactor, 0) / data.length}`;
+        const names = bought.map(i => i.name).join(', ');
+        const totalPrice = bought.reduce((s, i) => s + i.price, 0);
+        const avgDecFactor =
+            bought.reduce((s, i) => s + i.decFactor, 0) / bought.length;
 
-        outputEl.value = output;
+        outputTextarea.value =
+            `Bought furniture: ${names}\n` +
+            `Total price: ${totalPrice}\n` +
+            `Average decoration factor: ${avgDecFactor}`;
     });
 }
