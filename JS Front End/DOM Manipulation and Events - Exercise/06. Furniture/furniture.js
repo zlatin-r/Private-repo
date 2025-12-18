@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', solve);
 function solve() {
     const inputTextarea = document.querySelector('#input textarea');
     const generateBtn = document.querySelector('#input input[type="submit"]');
+    const buyBtn = document.querySelector('#shop input[type="submit"]');
     const tableBody = document.querySelector('#shop table tbody');
 
     generateBtn.addEventListener('click', (e) => {
@@ -52,5 +53,25 @@ function solve() {
 
             tableBody.appendChild(row);
         }
+    });
+
+    buyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const outputEl = document.querySelector('#shop textarea');
+
+        const data = [...document.querySelectorAll('table tbody tr')]
+            .filter(row => row.querySelector('input[type="checkbox"]').checked)
+            .map(row => ({
+                name: row.children[1].textContent.trim(),
+                price: Number(row.children[2].textContent),
+                decFactor: Number(row.children[3].textContent)
+            }));
+
+        let output = `Bought furniture: ${data.map(el => el.name).join(', ')}\n`;
+        output += `Total price: ${data.reduce((sum, el) => sum + el.price, 0).toFixed(2)}\n`;
+        output += `Average decoration factor: ${data.reduce((sum, el) => sum + el.decFactor, 0) / data.length}`;
+
+        outputEl.value = output;
     });
 }
