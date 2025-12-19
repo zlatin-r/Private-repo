@@ -1,21 +1,36 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    const convertBtn = document.getElementById('convert');
-    const inputUnitSelect = document.getElementById('inputUnits');
-    const outputUnitSelect = document.getElementById('outputUnits');
-    const inputValue = document.getElementById('inputDistance');
-    const outputValue = document.getElementById('outputDistance');
+    const convertBtnEl = document.querySelector('#convert');
+    const resultAreaEl = document.querySelector('#outputDistance');
 
-    convertBtn.addEventListener('click', (e) => {
+    const toMeters = {
+        km: 1000,
+        m: 1,
+        cm: 0.01,
+        mm: 0.001,
+        mi: 1609.34,
+        yrd: 0.9144,
+        ft: 0.3048,
+        in: 0.0254
+    };
+
+    convertBtnEl.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const inputUnit = inputUnitSelect.value;
-        const outputUnit = outputUnitSelect.value;
-        const distanceValue = Number(inputValue.value);
+        const distanceValueEl = Number(document.querySelector('#inputDistance').value);
+        const inputUnitEl = document.querySelector('#inputUnits');
+        const outputUnitEl = document.querySelector('#outputUnits');
 
-        console.log(inputUnit, outputUnit, distanceValue);
-    })
+        if (isNaN(distanceValueEl) || distanceValueEl < 0) {
+            resultAreaEl.value = "Invalid input";
+            return;
+        }
 
+        const valueInMeters = distanceValueEl * toMeters[inputUnitEl.value];
 
+        const result = valueInMeters / toMeters[outputUnitEl.value];
+
+        resultAreaEl.value = result;
+    });
 }
