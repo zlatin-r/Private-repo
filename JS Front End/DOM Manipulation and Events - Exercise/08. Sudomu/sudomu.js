@@ -1,8 +1,14 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    const checkBtn = document.querySelector('.buttons input[type="submit"]');
-    const resetBtn = document.querySelector('.buttons input[type="reset"]');
+    const form = document.querySelector('#solutionCheck');
+    const inputs = document.querySelectorAll('#solutionCheck td input');
 
-    const firstRowFirstColCell = document.querySelector('')
+    document.querySelector('.buttons').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (e.target.value === 'Quick Check') {
+
+        }
+    })
 }
