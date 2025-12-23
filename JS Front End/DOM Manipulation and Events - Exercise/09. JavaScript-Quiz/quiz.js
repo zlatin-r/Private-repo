@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    const questions = Array.from(document.querySelectorAll('.question'));
-    const answers = Array.from(document.querySelectorAll('.quiz-answer'));
+    const sections = Array.from(document.querySelectorAll('.question'));
     const resultsDiv = document.getElementById('results');
-    const title = document.querySelector('h1');
 
     const correctAnswers = [
         'onclick',
@@ -12,35 +10,37 @@ function solve() {
         'A programming API for HTML and XML documents'
     ];
 
-    let currentQuestion = 0;
     let rightAnswers = 0;
 
-    answers.forEach(answer => {
-        answer.addEventListener('click', () => {
-            if (answer.textContent === correctAnswers[currentQuestion]) {
-                rightAnswers++;
-            }
+    sections.forEach((section, index) => {
+        const answers = section.querySelectorAll('.quiz-answer');
 
-            questions[currentQuestion].style.display = 'none';
-            currentQuestion++;
+        answers.forEach(answer => {
+            answer.addEventListener('click', () => {
 
-            if (currentQuestion < questions.length) {
-                questions[currentQuestion].style.display = 'block';
-            } else {
-                showResults();
-            }
+                if (answer.textContent === correctAnswers[index]) {
+                    rightAnswers++;
+                }
+
+                section.style.display = 'none';
+
+                if (index + 1 < sections.length) {
+                    sections[index + 1].style.display = 'block';
+                } else {
+                    resultsDiv.style.display = 'block';
+
+                    if (rightAnswers === 3) {
+                        resultsDiv.textContent =
+                            'You are recognized as top JavaScript fan!';
+                    } else if (rightAnswers === 1) {
+                        resultsDiv.textContent =
+                            'You have 1 right answer';
+                    } else {
+                        resultsDiv.textContent =
+                            `You have ${rightAnswers} right answers`;
+                    }
+                }
+            });
         });
     });
-
-    function showResults() {
-        resultsDiv.style.display = 'block';
-
-        if (rightAnswers === correctAnswers.length) {
-            title.textContent = 'You are recognized as top JavaScript fan!';
-        } else if (rightAnswers === 1) {
-            title.textContent = 'You have 1 right answer';
-        } else {
-            title.textContent = `You have ${rightAnswers} right answers`;
-        }
-    }
 }
